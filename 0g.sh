@@ -58,17 +58,8 @@ function install_node() {
     fi
 
     # 更新和安装必要的软件
-    sudo apt update && sudo apt upgrade -y
+    sudo apt update
     sudo apt install curl git wget htop tmux build-essential jq make lz4 gcc unzip liblz4-tool -y
-
-    # 安装 Go
-    if ! check_go_installation; then
-        sudo rm -rf /usr/local/go
-        curl -L https://go.dev/dl/go1.22.0.linux-aarch64.tar.gz | sudo tar -xzf - -C /usr/local
-        echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> $HOME/.bash_profile
-        source $HOME/.bash_profile
-        go version
-    fi
 
     # 安装所有二进制文件
     git clone -b v0.1.0 https://github.com/0glabs/0g-chain.git
@@ -193,13 +184,6 @@ function install_storage_node() {
     sudo apt-get update
     sudo apt-get install clang cmake build-essential git screen cargo -y
 
-
-# 安装Go
-    sudo rm -rf /usr/local/go
-    curl -L https://go.dev/dl/go1.22.0.linux-aarch64.tar.gz | sudo tar -xzf - -C /usr/local
-    echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> $HOME/.bash_profile
-    export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
-    source $HOME/.bash_profile
 
     
 # 克隆仓库
